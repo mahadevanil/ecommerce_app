@@ -48,6 +48,11 @@ class ProductListingScreen extends StatelessWidget {
                   ),
                   kDim.kGap20,
                   CustomSearchFilter(
+                    onChanged: (query) {
+                      context
+                          .read<ProductsBloc>()
+                          .add(FilterProductsByQueryEvent(query));
+                    },
                     onFilterTap: () {
                       //Todo : on filter tap
                     },
@@ -61,9 +66,9 @@ class ProductListingScreen extends StatelessWidget {
                           mainAxisSpacing: 10.0,
                           shrinkWrap: true,
                           children: List.generate(
-                            state.productList?.length ?? 0,
+                            state.filterList?.length ?? 0,
                             (index) {
-                              var productList = state.productList?[index];
+                              var productList = state.filterList?[index];
                               return ItemCard(
                                 onTap: () {
                                   context.read<ProductsBloc>().add(ItemSelect(

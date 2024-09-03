@@ -7,9 +7,11 @@ final class ProductDetailState extends Equatable {
     this.product,
     this.sizeIndex,
     this.isAlreadyInCart,
+    this.addToCartLoading,
   });
   final String? productId;
   final LoadingStatus? loadingStatus;
+  final LoadingStatus? addToCartLoading;
   final ProductsModel? product;
   final int? sizeIndex;
   final bool? isAlreadyInCart;
@@ -17,6 +19,7 @@ final class ProductDetailState extends Equatable {
   List<Object> get props => [
         productId ?? '',
         loadingStatus ?? LoadingStatus.initial,
+        addToCartLoading ?? LoadingStatus.initial,
         product ?? ProductsModel(),
         sizeIndex ?? 0,
         isAlreadyInCart ?? false,
@@ -25,6 +28,7 @@ final class ProductDetailState extends Equatable {
     String? productId,
     int? sizeIndex,
     LoadingStatus? loadingStatus,
+    LoadingStatus? addToCartLoading,
     ProductsModel? product,
     bool? isAlreadyInCart,
   }) {
@@ -34,6 +38,7 @@ final class ProductDetailState extends Equatable {
       loadingStatus: loadingStatus ?? this.loadingStatus,
       product: product ?? this.product,
       isAlreadyInCart: isAlreadyInCart ?? this.isAlreadyInCart,
+      addToCartLoading: addToCartLoading ?? this.addToCartLoading,
     );
   }
 }

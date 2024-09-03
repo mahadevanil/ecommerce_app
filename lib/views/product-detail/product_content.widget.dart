@@ -96,7 +96,7 @@ class ProductContent extends StatelessWidget {
               ),
             ),
             kDim.kGap25,
-            AddToCartButton(),
+            const AddToCartButton(),
             kDim.kGap25,
           ],
         );

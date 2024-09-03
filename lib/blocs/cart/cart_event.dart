@@ -17,3 +17,24 @@ final class AddToCartEvent extends CartEvent {
 final class CartInit extends CartEvent {
   const CartInit();
 }
+
+final class DecrementCounter extends CartEvent {
+  const DecrementCounter({
+    required this.index,
+  });
+  final int index;
+}
+
+final class IncrementCounter extends CartEvent {
+  const IncrementCounter({
+    required this.index,
+  });
+  final int index;
+}
+
+final class RemoveItem extends CartEvent {
+  const RemoveItem({
+    required this.index,
+  });
+  final int index;
+}

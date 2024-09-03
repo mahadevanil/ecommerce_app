@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:rapidor/config/config.dart';
 import 'package:rapidor/data/repositories/products.repo.dart';
 import 'package:rapidor/utils/enums.dart';
 
@@ -15,6 +16,21 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   ProductsBloc() : super(const ProductsState()) {
     on<ProductsInit>(onProductInit);
     on<ItemSelect>(onItemSelect);
+    on<FilterProductsByQueryEvent>(onFilterProductsByQuery);
+  }
+  FutureOr<void> onFilterProductsByQuery(
+    FilterProductsByQueryEvent event,
+    Emitter<ProductsState> emit,
+  ) {
+    final filteredProducts = fCon.filterProductsByQuery(
+      products: state.filterList ?? [],
+      query: event.query,
+    );
+    if (event.query.isEmpty) {
+      emit(state.copyWith(filterList: state.productList));
+    } else {
+      emit(state.copyWith(filterList: filteredProducts));
+    }
   }
 
   FutureOr<void> onItemSelect(ItemSelect event, Emitter<ProductsState> emit) {
@@ -46,6 +62,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       emit(
         state.copyWith(
           productList: productList,
+          filterList: productList,
           loadingStatus: LoadingStatus.success,
         ),
       );

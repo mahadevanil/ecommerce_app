@@ -17,3 +17,9 @@ final class ItemSelect extends ProductsEvent {
   });
   final String id;
 }
+
+class FilterProductsByQueryEvent extends ProductsEvent {
+  final String query;
+
+  const FilterProductsByQueryEvent(this.query);
+}

@@ -20,3 +20,10 @@ final class SizeSelect extends ProductDetailEvent {
   });
   final int index;
 }
+
+final class AddToCart extends ProductDetailEvent {
+  const AddToCart({
+    required this.productId,
+  });
+  final String productId;
+}

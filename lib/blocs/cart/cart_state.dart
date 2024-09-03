@@ -3,22 +3,27 @@ part of 'cart_bloc.dart';
 final class CartState extends Equatable {
   const CartState({
     this.loadingStatus,
-    this.cartData,
+    this.cartList,
+    this.total,
   });
   final LoadingStatus? loadingStatus;
-  final CartModel? cartData;
+  final List<CartItemModel>? cartList;
+  final num? total;
   @override
   List<Object> get props => [
         loadingStatus ?? LoadingStatus.initial,
-        cartData ?? CartModel(),
+        cartList ?? [],
+        total ?? 0,
       ];
   CartState copyWith({
     LoadingStatus? loadingStatus,
-    CartModel? cartData,
+    List<CartItemModel>? cartList,
+    num? total,
   }) {
     return CartState(
       loadingStatus: loadingStatus ?? this.loadingStatus,
-      cartData: cartData ?? this.cartData,
+      cartList: cartList ?? this.cartList,
+      total: total ?? this.total,
     );
   }
 }

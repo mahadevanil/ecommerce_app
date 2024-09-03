@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rapidor/blocs/cart/cart_bloc.dart';
 import 'package:rapidor/blocs/product-detail/product_detail_bloc.dart';
 import 'package:rapidor/constants/route_constants.dart';
 
@@ -49,29 +48,35 @@ class AddToCartButton extends StatelessWidget {
                       ht: 15,
                       wd: 15,
                       assetImage: Assets.icons.cart,
-                      color: Colors.white,
+                      color: state.isAlreadyInCart ?? false
+                          ? AppColors.black
+                          : AppColors.white,
                     ),
                     kDim.kGap10,
                     KStyles().semiBold(
                       text: state.isAlreadyInCart ?? false
                           ? 'Go to Cart'
                           : StringConst.addToCart,
-                      color: AppColors.white,
+                      color: state.isAlreadyInCart ?? false
+                          ? AppColors.black
+                          : AppColors.white,
                       size: 16,
                     ),
                   ],
                 ),
-                color: AppColors.black,
+                color: state.isAlreadyInCart ?? false
+                    ? AppColors.grey
+                    : AppColors.black,
                 height: 50,
                 onPressed: () {
-                  if (!(state.isAlreadyInCart ?? true)) {
-                    context.read<CartBloc>().add(
-                          AddToCartEvent(
+                  if (state.isAlreadyInCart ?? false) {
+                    context.pushNamed(RouteConstants.name.cart);
+                  } else {
+                    context.read<ProductDetailBloc>().add(
+                          AddToCart(
                             productId: state.product?.id.toString() ?? '0',
                           ),
                         );
-                  } else {
-                    context.pushNamed(RouteConstants.name.cart);
                   }
                 },
                 borderRadius: kDim.kRadius30,

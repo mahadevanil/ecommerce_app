@@ -4,4 +4,5 @@ class StringConst {
   static const String loginToken = 'loginToken';
   static const String addToCart = 'Add to cart';
   static const String totalPrice = 'Total Price';
+  static const String myCart = 'My Cart';
 }

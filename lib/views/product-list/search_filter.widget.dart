@@ -8,15 +8,23 @@ class CustomSearchFilter extends StatelessWidget {
   const CustomSearchFilter({
     super.key,
     this.onFilterTap,
+    this.onChanged,
   });
   final void Function()? onFilterTap;
+  final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
+    final FocusNode focusNode = FocusNode();
     return Row(
       children: [
         Expanded(
           flex: 4,
           child: SearchBar(
+            focusNode: focusNode,
+            onChanged: onChanged,
+            onTapOutside: (event) {
+              FocusScope.of(context).unfocus();
+            },
             constraints: const BoxConstraints(
               minHeight: 50,
             ),

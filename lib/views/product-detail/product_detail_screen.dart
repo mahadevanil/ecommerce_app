@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rapidor/blocs/product-detail/product_detail_bloc.dart';
 import 'package:rapidor/config/config.dart';
@@ -21,7 +22,12 @@ class ProductDetailScreen extends StatelessWidget {
 
     return BlocConsumer<ProductDetailBloc, ProductDetailState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state.isAlreadyInCart ?? false) {
+          Fluttertoast.showToast(
+            msg: "Item added to Cart",
+            gravity: ToastGravity.SNACKBAR,
+          );
+        }
       },
       builder: (context, state) {
         return Scaffold(

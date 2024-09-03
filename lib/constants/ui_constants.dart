@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:motion_toast/motion_toast.dart';
 import 'package:rapidor/config/config.dart';
+import 'package:rapidor/style/text_styles.dart';
 
 import '../gen/assets.gen.dart';
 import '../style/colors.dart';
